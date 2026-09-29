@@ -23,6 +23,37 @@ A modern, responsive, and interactive web application prototype designed for a c
   - Status filters (*Pending, Assigned, Out for Delivery, Delivered, Cancelled*) and Priority filters.
   - **"Create Order" Modal**: Interactive form with automatic sequential Order ID generation (`#ORD-XXXX`).
 
+- **Live Order Simulation Engine**:
+  - Global simulation control bar with Play/Pause toggles and speed multipliers (`1x`, `2x`, `5x`).
+  - Automatically advances active deliveries through lifecycle stages (`Assigned` ➔ `Picked Up` ➔ `Out for Delivery` ➔ `Delivered`).
+  - Realistic **"Spawn Sim Order"** generator to dynamically insert live incoming customer orders during viva presentations.
+
+- **Simulated Customer Smartphone Device (Mobile Preview)**:
+  - Realistic smartphone device mockup with Dynamic Island notch, status bar, and real-time clock.
+  - Interactive live tracking view with customer order selector, rider profile, and animated route progress bar with moving motorbike indicator.
+  - Full customer push notification inbox recording chronological delivery alerts.
+  - Web Audio API acoustic chime generator producing authentic smartphone push notification sounds and urgent traffic alert chimes without external media files.
+
+- **Dynamic Live ETA Countdown & Verification**:
+  - Real-time digital ETA countdown clock calculating remaining delivery time based on rider distance and status.
+  - Visual verification badges (`🟢 ETA Verified: On Schedule` vs `⚠️ High Traffic Delay (+10m)`).
+  - Integrated into Dashboard recent orders, Order Management table, Order Details modal, and Customer Device.
+
+- **High Traffic Congestion Incident & Fast Customer Push Alert**:
+  - One-click trigger for heavy road traffic congestion incidents with **Configurable Delay Durations** (`+5m`, `+10m`, `+15m`, `+20m`, or custom minutes).
+  - Dynamically recalculates ETA countdown and adjusts rider delivery pace.
+  - **Fast push notification dispatched directly to customer device**:
+    $$\text{"order delayed wait for } \mathbf{\{delayMinutes\}} \text{ minutes"}$$
+  - Drops down an animated push banner from the smartphone Dynamic Island with acoustic chime sound and haptic vibration simulation.
+  - Resolvable traffic control button to immediately restore standard delivery transit.
+
+- **Live Fleet & Delivery GPS Vector Map (Kakinada City)**:
+  - Interactive SVG map featuring city landmarks (*Central Logistics Hub, Bhanugudi Junction, Surya Rao Peta, JNTUK Campus, Jagannaickpur, RTC Complex, Kakinada Port*).
+  - Real-time animated rider markers with glowing trajectory paths and road congestion overlays.
+  - Live GPS Telemetry card tracking Latitude, Longitude, Rider Speed (km/h), Route Congestion Status, and Street details in real time.
+  - Recenter and Traffic Heatmap toggle buttons.
+  - Dual tracking modes on customer phone: **🛣️ Stepper View** and **🗺️ Mini GPS Map View**.
+
 - **5-Stage Live Lifecycle Timeline**:
   - Order details modal featuring an interactive tracking stepper:
     $$\text{Order Created} \longrightarrow \text{Rider Assigned} \longrightarrow \text{Picked Up} \longrightarrow \text{Out for Delivery} \longrightarrow \text{Delivered}$$

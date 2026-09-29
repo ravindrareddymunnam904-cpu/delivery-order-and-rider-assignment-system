@@ -1587,3 +1587,1583 @@ input:checked + .slider:before {
 .sidebar-overlay.active {
   display: block;
 }
+
+/* ==========================================================================
+   Customer Smartphone Preview Topbar Button
+   ========================================================================== */
+
+.customer-preview-top-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.85rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  color: var(--text-primary);
+  cursor: pointer;
+  position: relative;
+  transition: all var(--transition-speed);
+}
+
+.customer-preview-top-btn:hover {
+  background: var(--primary-light);
+  border-color: var(--primary);
+  color: var(--primary);
+  transform: translateY(-1px);
+}
+
+.customer-alert-pill {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: var(--danger);
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 0 2px var(--bg-surface);
+  animation: trafficPulse 1.5s infinite;
+}
+
+/* ==========================================================================
+   Live Order Simulation Control Bar
+   ========================================================================== */
+
+.simulation-bar {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  border-left: 4px solid var(--primary);
+}
+
+.sim-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.sim-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-full);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.sim-status-badge.paused {
+  background: rgba(148, 163, 184, 0.15);
+  color: var(--text-secondary);
+  border: 1px solid rgba(148, 163, 184, 0.3);
+}
+
+.sim-status-badge.paused .sim-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--text-muted);
+}
+
+.sim-status-badge.running {
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--success);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+}
+
+.sim-status-badge.running .sim-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--success);
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25);
+  animation: pulseRing 1.8s infinite;
+}
+
+.sim-speed-selector {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  background: var(--bg-subtle);
+  padding: 0.2rem 0.35rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color);
+}
+
+.sim-speed-label {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  margin-right: 0.2rem;
+}
+
+.speed-btn {
+  background: transparent;
+  border: none;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.18rem 0.5rem;
+  border-radius: 4px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-speed);
+}
+
+.speed-btn.active {
+  background: var(--primary);
+  color: #fff;
+  box-shadow: var(--shadow-sm);
+}
+
+.sim-center-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+  background: var(--bg-subtle);
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-color);
+}
+
+.sim-pulse-icon {
+  font-size: 0.95rem;
+  animation: bounce 2s infinite ease-in-out;
+}
+
+.sim-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+/* ==========================================================================
+   Live ETA Badges & Table Displays
+   ========================================================================== */
+
+.eta-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--radius-full);
+  font-size: 0.76rem;
+  font-weight: 600;
+  white-space: nowrap;
+  letter-spacing: -0.01em;
+}
+
+.eta-pill-transit {
+  background: rgba(14, 165, 233, 0.12);
+  color: #0284C7;
+  border: 1px solid rgba(14, 165, 233, 0.3);
+}
+
+[data-theme="dark"] .eta-pill-transit {
+  background: rgba(14, 165, 233, 0.2);
+  color: #38BDF8;
+  border: 1px solid rgba(14, 165, 233, 0.4);
+}
+
+.eta-pill-traffic {
+  background: rgba(239, 68, 68, 0.15);
+  color: #DC2626;
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  animation: trafficPulse 1.8s infinite;
+  font-weight: 700;
+}
+
+[data-theme="dark"] .eta-pill-traffic {
+  background: rgba(239, 68, 68, 0.25);
+  color: #F87171;
+  border: 1px solid rgba(239, 68, 68, 0.5);
+}
+
+.eta-pill-delivered {
+  background: rgba(16, 185, 129, 0.12);
+  color: #059669;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+[data-theme="dark"] .eta-pill-delivered {
+  background: rgba(16, 185, 129, 0.2);
+  color: #34D399;
+  border: 1px solid rgba(16, 185, 129, 0.4);
+}
+
+.eta-pill-pending {
+  background: rgba(245, 158, 11, 0.12);
+  color: #B45309;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+[data-theme="dark"] .eta-pill-pending {
+  background: rgba(245, 158, 11, 0.2);
+  color: #FBBF24;
+  border: 1px solid rgba(245, 158, 11, 0.4);
+}
+
+/* ==========================================================================
+   Order Details Modal ETA Verification Box
+   ========================================================================== */
+
+.detail-eta-box {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.15rem;
+  margin-bottom: 1.25rem;
+  transition: all var(--transition-speed);
+}
+
+.detail-eta-box.traffic-alert {
+  background: rgba(239, 68, 68, 0.08);
+  border-color: rgba(239, 68, 68, 0.4);
+  box-shadow: 0 0 15px rgba(239, 68, 68, 0.15);
+}
+
+.detail-eta-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.detail-eta-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 0.03em;
+}
+
+.detail-eta-time {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-top: 2px;
+}
+
+.detail-progress-track {
+  width: 100%;
+  height: 8px;
+  background: var(--border-color);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 0.4rem;
+}
+
+.detail-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary), var(--info));
+  border-radius: var(--radius-full);
+  transition: width 0.6s ease;
+}
+
+.detail-eta-box.traffic-alert .detail-progress-fill {
+  background: linear-gradient(90deg, var(--warning), var(--danger));
+}
+
+.detail-progress-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-bottom: 0.85rem;
+}
+
+.detail-incident-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+  border-top: 1px solid var(--border-color);
+  padding-top: 0.75rem;
+}
+
+/* ==========================================================================
+   Simulated Customer Smartphone Device Modal
+   ========================================================================== */
+
+.phone-modal-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 440px;
+  animation: modalScaleUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.phone-device {
+  width: 380px;
+  max-width: 95vw;
+  height: 760px;
+  max-height: 92vh;
+  background: #111418;
+  border-radius: 46px;
+  padding: 10px;
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.1), inset 0 0 0 2px #2a2e39;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.phone-device.vibrate-alert {
+  animation: phoneVibrate 0.6s ease;
+}
+
+/* Side Buttons */
+.phone-volume-up, .phone-volume-down, .phone-power-btn {
+  position: absolute;
+  background: #232731;
+  border-radius: 3px;
+}
+
+.phone-volume-up {
+  left: -4px;
+  top: 120px;
+  width: 4px;
+  height: 42px;
+}
+
+.phone-volume-down {
+  left: -4px;
+  top: 172px;
+  width: 4px;
+  height: 42px;
+}
+
+.phone-power-btn {
+  right: -4px;
+  top: 140px;
+  width: 4px;
+  height: 58px;
+}
+
+/* Phone Screen */
+.phone-screen {
+  flex: 1;
+  background: var(--bg-body);
+  border-radius: 38px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Dynamic Island Notch */
+.phone-island-notch {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 108px;
+  height: 26px;
+  background: #000;
+  border-radius: 20px;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.island-camera {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #111e30;
+  border: 1px solid #1a2f4c;
+}
+
+.island-indicator {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #10B981;
+  box-shadow: 0 0 6px #10B981;
+}
+
+/* Top Push Notification Banner */
+.phone-push-banner {
+  position: absolute;
+  top: 40px;
+  left: 10px;
+  right: 10px;
+  background: rgba(17, 24, 39, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  border-radius: 18px;
+  padding: 0.85rem 1rem;
+  z-index: 60;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+  color: #fff;
+  display: none;
+  transform: translateY(-20px);
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.phone-push-banner.active {
+  display: block;
+  transform: translateY(0);
+  opacity: 1;
+  animation: pushSlideDown 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.phone-push-banner.traffic-urgent {
+  border-color: #EF4444;
+  box-shadow: 0 10px 25px -5px rgba(239, 68, 68, 0.4);
+}
+
+.push-banner-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.25rem;
+}
+
+.push-app-id {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.push-app-icon {
+  font-size: 0.8rem;
+}
+
+.push-app-name {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #E2E8F0;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.push-time {
+  font-size: 0.68rem;
+  color: #94A3B8;
+}
+
+.push-banner-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #FBBF24;
+  margin-bottom: 0.15rem;
+}
+
+.phone-push-banner.traffic-urgent .push-banner-title {
+  color: #F87171;
+}
+
+.push-banner-body {
+  font-size: 0.76rem;
+  color: #F1F5F9;
+  line-height: 1.35;
+}
+
+/* Phone Status Bar */
+.phone-status-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.8rem 1.4rem 0.3rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  z-index: 10;
+}
+
+.phone-status-icons {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.phone-battery {
+  width: 20px;
+  height: 10px;
+  border: 1.5px solid currentColor;
+  border-radius: 3px;
+  padding: 1px;
+  position: relative;
+}
+
+.phone-battery::after {
+  content: '';
+  position: absolute;
+  right: -3px;
+  top: 2px;
+  width: 1.5px;
+  height: 4px;
+  background: currentColor;
+  border-radius: 0 1px 1px 0;
+}
+
+.battery-level {
+  width: 85%;
+  height: 100%;
+  background: var(--success);
+  border-radius: 1px;
+}
+
+/* Phone App Header */
+.phone-app-header {
+  padding: 0.5rem 1.15rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.phone-app-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.phone-app-logo {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: var(--primary);
+  color: #fff;
+  font-weight: 800;
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.phone-app-name {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.1;
+}
+
+.phone-app-status {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+}
+
+.phone-close-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.4rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  line-height: 1;
+  padding: 0.2rem;
+}
+
+.phone-close-btn:hover {
+  color: var(--danger);
+}
+
+/* Phone Order Selector */
+.phone-order-selector-wrap {
+  padding: 0.45rem 1.15rem;
+  background: var(--bg-subtle);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.phone-order-selector-wrap label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.phone-select {
+  width: 100%;
+  padding: 0.35rem 0.5rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color);
+  background: var(--bg-surface);
+  color: var(--text-primary);
+}
+
+/* Scroll Content */
+.phone-scroll-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.85rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+/* Traffic Alert Card inside Phone */
+.phone-traffic-alert-card {
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 0.85rem;
+  animation: trafficPulse 2s infinite;
+}
+
+.traffic-alert-header {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--danger);
+  font-size: 0.82rem;
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+
+.traffic-pulse-icon {
+  font-size: 1rem;
+}
+
+.phone-traffic-alert-card p {
+  font-size: 0.74rem;
+  color: var(--text-primary);
+  line-height: 1.35;
+  margin-bottom: 0.5rem;
+}
+
+.traffic-alert-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Live ETA Hero Card */
+.phone-eta-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 1rem;
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.phone-eta-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary), var(--info));
+}
+
+.phone-eta-card.traffic-alert::before {
+  background: linear-gradient(90deg, var(--warning), var(--danger));
+}
+
+.phone-eta-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.4rem;
+}
+
+.phone-eta-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.phone-eta-badge {
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 0.15rem 0.45rem;
+  border-radius: var(--radius-full);
+}
+
+.phone-eta-badge.on-time {
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--success);
+}
+
+.phone-eta-badge.delayed {
+  background: rgba(239, 68, 68, 0.18);
+  color: var(--danger);
+  animation: trafficPulse 1.8s infinite;
+}
+
+.phone-countdown-clock {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+  margin: 0.2rem 0;
+}
+
+.phone-eta-card.traffic-alert .phone-countdown-clock {
+  color: var(--danger);
+}
+
+.phone-arrival-time {
+  font-size: 0.74rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+  margin-bottom: 0.85rem;
+}
+
+/* Animated Road Track */
+.route-progress-track {
+  display: flex;
+  align-items: center;
+  position: relative;
+  height: 28px;
+  margin: 0.5rem 0.4rem 0.35rem;
+}
+
+.route-progress-track::before {
+  content: '';
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  height: 6px;
+  background: var(--border-color);
+  border-radius: 4px;
+}
+
+.route-line-fill {
+  position: absolute;
+  left: 12px;
+  height: 6px;
+  background: linear-gradient(90deg, var(--primary), var(--info));
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+
+.phone-eta-card.traffic-alert .route-line-fill {
+  background: linear-gradient(90deg, var(--warning), var(--danger));
+}
+
+.route-point {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  z-index: 2;
+  box-shadow: var(--shadow-sm);
+}
+
+.route-point.hub-point {
+  position: absolute;
+  left: 0;
+}
+
+.route-point.home-point {
+  position: absolute;
+  right: 0;
+}
+
+.route-rider-marker {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  z-index: 3;
+  box-shadow: 0 2px 6px rgba(79, 70, 229, 0.4);
+  transition: left 0.5s ease;
+}
+
+.phone-eta-card.traffic-alert .route-rider-marker {
+  background: var(--danger);
+  box-shadow: 0 2px 6px rgba(239, 68, 68, 0.5);
+  animation: trafficPulse 1.5s infinite;
+}
+
+.rider-pulse {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid var(--primary);
+  animation: pulseRing 1.8s infinite;
+}
+
+.route-status-caption {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  margin-top: 0.25rem;
+}
+
+/* Phone Rider Card */
+.phone-rider-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.phone-rider-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--primary-light);
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.phone-rider-details {
+  flex: 1;
+}
+
+.phone-rider-name {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.phone-rider-sub {
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+}
+
+.phone-rider-contact {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+}
+
+.phone-call-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: var(--success);
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-speed);
+}
+
+.phone-call-btn:hover {
+  background: var(--success);
+  color: #fff;
+}
+
+/* Phone Order Snapshot */
+.phone-order-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.phone-section-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.2rem;
+}
+
+.phone-order-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--text-primary);
+}
+
+.phone-order-key {
+  color: var(--text-secondary);
+}
+
+/* Phone Notifications Inbox */
+.phone-notifs-section {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 0.85rem;
+}
+
+.phone-notif-count {
+  background: var(--primary-light);
+  color: var(--primary);
+  font-size: 0.65rem;
+  padding: 0.1rem 0.4rem;
+  border-radius: 99px;
+  font-weight: 700;
+}
+
+.phone-notifs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  margin-top: 0.4rem;
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+.phone-notif-item {
+  padding: 0.45rem 0.6rem;
+  border-radius: var(--radius-sm);
+  background: var(--bg-subtle);
+  border-left: 3px solid var(--info);
+  font-size: 0.72rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.phone-notif-item.urgent {
+  background: rgba(239, 68, 68, 0.1);
+  border-left-color: var(--danger);
+}
+
+.phone-notif-item.urgent .phone-notif-title {
+  color: var(--danger);
+  font-weight: 700;
+}
+
+.phone-notif-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.phone-notif-title {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.phone-notif-time {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+}
+
+.phone-notif-msg {
+  color: var(--text-secondary);
+  line-height: 1.3;
+}
+
+/* Phone Demo Tools */
+.phone-demo-tools {
+  background: var(--bg-subtle);
+  border: 1px dashed var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 0.7rem 0.75rem;
+}
+
+.phone-demo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.4rem;
+  margin-bottom: 0.45rem;
+}
+
+.phone-audio-toggle {
+  display: flex;
+  align-items: center;
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+}
+
+.phone-audio-toggle label {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  cursor: pointer;
+}
+
+/* Phone Bottom Home Bar */
+.phone-home-indicator {
+  width: 110px;
+  height: 4px;
+  background: var(--text-muted);
+  border-radius: 99px;
+  margin: 6px auto;
+  opacity: 0.5;
+}
+
+/* ==========================================================================
+   Keyframes & Animations
+   ========================================================================== */
+
+@keyframes trafficPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4);
+  }
+  50% {
+    transform: scale(1.03);
+    box-shadow: 0 0 0 6px rgba(239, 68, 68, 0);
+  }
+}
+
+@keyframes pulseRing {
+  0% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.5);
+  }
+  70% {
+    box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+  }
+}
+
+@keyframes pushSlideDown {
+  0% {
+    transform: translateY(-30px);
+    opacity: 0;
+  }
+  60% {
+    transform: translateY(4px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes phoneVibrate {
+  0% { transform: translate(0, 0); }
+  20% { transform: translate(-3px, 2px); }
+  40% { transform: translate(3px, -2px); }
+  60% { transform: translate(-3px, -2px); }
+  80% { transform: translate(3px, 2px); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+/* ==========================================================================
+   Custom Traffic Delay Selector Styles
+   ========================================================================== */
+
+.sim-traffic-control-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.select-traffic-delay {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.25rem 0.4rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  outline: none;
+  transition: border-color var(--transition-speed);
+}
+
+.select-traffic-delay:focus {
+  border-color: var(--warning);
+}
+
+/* ==========================================================================
+   Live GPS City Map View
+   ========================================================================== */
+
+.map-layout-grid {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 1.25rem;
+  align-items: start;
+}
+
+@media (max-width: 1100px) {
+  .map-layout-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.map-canvas-container {
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.map-header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border-color);
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.map-legend {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.74rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.legend-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+
+.legend-dot.hub-dot {
+  background: #4F46E5;
+  box-shadow: 0 0 6px #4F46E5;
+}
+
+.legend-dot.rider-dot {
+  background: #10B981;
+  box-shadow: 0 0 6px #10B981;
+}
+
+.legend-dot.customer-dot {
+  background: #0EA5E9;
+}
+
+.legend-dot.traffic-dot {
+  background: #EF4444;
+  box-shadow: 0 0 6px #EF4444;
+}
+
+.map-viewport {
+  position: relative;
+  width: 100%;
+  height: 520px;
+  background: #0F172A;
+  overflow: hidden;
+}
+
+[data-theme="light"] .map-viewport {
+  background: #1E293B;
+}
+
+#city-vector-map {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* SVG Vector Map Styling */
+.map-water {
+  fill: #0c2b4e;
+  opacity: 0.85;
+}
+
+[data-theme="light"] .map-water {
+  fill: #143e6c;
+}
+
+.map-water-label {
+  font-size: 13px;
+  font-weight: 700;
+  fill: #38BDF8;
+  letter-spacing: 0.15em;
+  opacity: 0.45;
+  text-anchor: middle;
+}
+
+.map-canal {
+  stroke: #143e6c;
+  stroke-width: 14;
+  fill: none;
+  stroke-linecap: round;
+  opacity: 0.7;
+}
+
+.map-canal-label {
+  font-size: 10px;
+  fill: #38BDF8;
+  opacity: 0.5;
+  font-style: italic;
+}
+
+/* Roads */
+.map-road {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.map-road.highway {
+  stroke: #334155;
+  stroke-width: 10;
+}
+
+.map-road.arterial {
+  stroke: #2e3e56;
+  stroke-width: 8;
+}
+
+.map-road.crossroad {
+  stroke: #253346;
+  stroke-width: 6;
+}
+
+.map-road.port-road {
+  stroke: #2d3b50;
+  stroke-width: 7;
+}
+
+/* Landmarks */
+.landmark-box {
+  fill: rgba(15, 23, 42, 0.75);
+  stroke: rgba(255, 255, 255, 0.12);
+  stroke-width: 1;
+}
+
+.landmark-text {
+  font-size: 9.5px;
+  font-weight: 600;
+  fill: #94A3B8;
+  text-anchor: middle;
+}
+
+/* Hub Marker */
+.map-hub-marker {
+  cursor: pointer;
+}
+
+.hub-pulse-ring {
+  fill: none;
+  stroke: #4F46E5;
+  stroke-width: 2;
+  opacity: 0.6;
+  animation: pulseRing 2s infinite;
+}
+
+.hub-circle {
+  fill: #4F46E5;
+  box-shadow: 0 0 10px #4F46E5;
+}
+
+.hub-icon-text {
+  font-size: 12px;
+  text-anchor: middle;
+}
+
+.marker-caption {
+  font-size: 10px;
+  font-weight: 700;
+  fill: #F8FAFC;
+  text-anchor: middle;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+}
+
+.marker-caption.hub-caption {
+  fill: #A5B4FC;
+}
+
+/* Delivery Route Lines */
+.map-route-line {
+  fill: none;
+  stroke: url(#roadGradient);
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-dasharray: 6 4;
+  animation: dashMove 20s linear infinite;
+  filter: url(#neonGlow);
+}
+
+.map-route-line.traffic-congested {
+  stroke: url(#trafficRoadGradient);
+  stroke-width: 6;
+  filter: drop-shadow(0 0 8px rgba(239, 68, 68, 0.8));
+  animation: dashMove 35s linear infinite;
+}
+
+@keyframes dashMove {
+  from { stroke-dashoffset: 200; }
+  to { stroke-dashoffset: 0; }
+}
+
+/* Traffic Alert Zone Badge on Map */
+.map-traffic-warning-pill {
+  fill: rgba(239, 68, 68, 0.9);
+  stroke: #F87171;
+  stroke-width: 1.5;
+  animation: trafficPulse 1.8s infinite;
+}
+
+.map-traffic-warning-text {
+  font-size: 9px;
+  font-weight: 800;
+  fill: #fff;
+  text-anchor: middle;
+}
+
+/* Destination Pins on Map */
+.dest-pin-circle {
+  fill: #0EA5E9;
+  stroke: #fff;
+  stroke-width: 2;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.dest-pin-circle:hover {
+  transform: scale(1.2);
+}
+
+/* Rider Markers on Map */
+.rider-map-marker {
+  cursor: pointer;
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.rider-bubble-bg {
+  fill: #10B981;
+  stroke: #fff;
+  stroke-width: 2;
+  filter: drop-shadow(0 2px 5px rgba(0,0,0,0.4));
+}
+
+.rider-map-marker.in-traffic .rider-bubble-bg {
+  fill: #EF4444;
+  animation: trafficPulse 1.5s infinite;
+}
+
+/* Telemetry Sidebar */
+.map-telemetry-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.telemetry-card {
+  border-left: 4px solid var(--info);
+  padding: 1.15rem;
+}
+
+.telemetry-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.85rem;
+}
+
+.telemetry-tag {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+}
+
+.telemetry-live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--success);
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.telemetry-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+  background: var(--bg-subtle);
+  padding: 0.75rem;
+  border-radius: var(--radius-md);
+  margin-bottom: 0.85rem;
+}
+
+.telemetry-stat {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-label {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.stat-value {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.telemetry-address-block {
+  font-size: 0.78rem;
+  margin-bottom: 1rem;
+}
+
+.telemetry-street-name {
+  font-weight: 700;
+  color: var(--primary);
+  margin-top: 1px;
+}
+
+.telemetry-footer-actions {
+  display: flex;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+}
+
+/* Rider Telemetry List */
+.rider-telemetry-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.65rem;
+  border-radius: var(--radius-md);
+  background: var(--bg-subtle);
+  margin-bottom: 0.45rem;
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: all var(--transition-speed);
+}
+
+.rider-telemetry-item:hover {
+  background: var(--bg-hover);
+  transform: translateX(2px);
+}
+
+/* ==========================================================================
+   Customer Phone Map Tabs & Mini GPS Map View
+   ========================================================================== */
+
+.phone-tracking-tabs {
+  display: flex;
+  background: var(--bg-subtle);
+  border-radius: var(--radius-md);
+  padding: 3px;
+  gap: 4px;
+}
+
+.phone-tab-btn {
+  flex: 1;
+  padding: 0.35rem 0.5rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--transition-speed);
+}
+
+.phone-tab-btn.active {
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+.phone-mini-map-view {
+  background: #0F172A;
+  border-radius: var(--radius-md);
+  padding: 4px;
+  margin: 0.5rem 0;
+  overflow: hidden;
+  position: relative;
+}
+
+#phone-mini-svg-map {
+  width: 100%;
+  height: 125px;
+  display: block;
+}
+
+.phone-mini-telemetry {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #38BDF8;
+  padding: 0.25rem;
+  background: rgba(15, 23, 42, 0.9);
+  border-radius: 4px;
+  margin-top: 2px;
+}

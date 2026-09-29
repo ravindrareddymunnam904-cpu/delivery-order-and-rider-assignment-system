@@ -80,7 +80,18 @@
           <span class="nav-badge warning" id="nav-unassigned-count">0</span>
         </button>
 
-        <!-- 5. Settings -->
+        <!-- 5. Live GPS Map -->
+        <button class="nav-link" data-view="map" id="nav-map">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon>
+            <line x1="8" y1="2" x2="8" y2="18"></line>
+            <line x1="16" y1="6" x2="16" y2="22"></line>
+          </svg>
+          <span>Live GPS Map</span>
+          <span class="nav-badge" id="nav-map-active-count">1 Live</span>
+        </button>
+
+        <!-- 6. Settings -->
         <button class="nav-link" data-view="settings" id="nav-settings">
           <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="3"></circle>
@@ -144,6 +155,16 @@
             </svg>
           </button>
 
+          <!-- Customer Smartphone Device Simulator Button -->
+          <button class="customer-preview-top-btn" id="open-customer-device-btn" title="Simulate Customer Smartphone Device (Live Notifications & Tracking)">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+              <line x1="12" y1="18" x2="12.01" y2="18"></line>
+            </svg>
+            <span class="btn-text">Customer Phone</span>
+            <span class="customer-alert-pill" id="customer-top-alert-pill" style="display:none;">1</span>
+          </button>
+
           <!-- Notification Bell -->
           <div style="position: relative;">
             <button class="icon-btn" id="notification-btn" title="System Notifications" aria-label="View notifications">
@@ -181,6 +202,70 @@
            Main Content Views
            ==================================================================== -->
       <main class="main-content">
+
+        <!-- ================= LIVE SIMULATION CONTROL BAR ================= -->
+        <div class="simulation-bar" id="simulation-bar">
+          <div class="sim-left">
+            <div class="sim-status-badge paused" id="sim-status-badge">
+              <span class="sim-dot"></span>
+              <span id="sim-status-text">Simulation: Paused</span>
+            </div>
+            <div class="sim-speed-selector">
+              <span class="sim-speed-label">Speed:</span>
+              <button class="speed-btn active" data-speed="1">1x</button>
+              <button class="speed-btn" data-speed="2">2x</button>
+              <button class="speed-btn" data-speed="5">5x</button>
+            </div>
+          </div>
+
+          <div class="sim-center-info" id="sim-active-info">
+            <span class="sim-pulse-icon">⚡</span>
+            <span id="sim-active-summary">Tracking 1 active delivery (#ORD-1021) • ETA: 12m</span>
+          </div>
+
+          <div class="sim-actions">
+            <button class="btn btn-primary btn-sm" id="sim-toggle-btn" title="Toggle real-time order lifecycle simulation">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+              </svg>
+              <span id="sim-toggle-label">Start Simulation</span>
+            </button>
+
+            <div class="sim-traffic-control-wrap">
+              <button class="btn btn-warning btn-sm" id="sim-trigger-traffic-btn" title="Simulate heavy traffic congestion and dispatch immediate customer push alert">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                  <line x1="12" y1="9" x2="12" y2="13"></line>
+                  <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                </svg>
+                <span id="sim-traffic-btn-text">Traffic Jam (<span id="sim-delay-min-display">10</span>m)</span>
+              </button>
+              <select id="sim-traffic-delay-select" class="select-traffic-delay" title="Select delay duration">
+                <option value="5">+5m</option>
+                <option value="10" selected>+10m</option>
+                <option value="15">+15m</option>
+                <option value="20">+20m</option>
+                <option value="custom">Custom...</option>
+              </select>
+            </div>
+
+            <button class="btn btn-outline btn-sm" id="sim-spawn-order-btn" title="Generate simulated incoming live order">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+              <span>+ Spawn Sim Order</span>
+            </button>
+
+            <button class="btn btn-outline btn-sm" id="sim-open-phone-btn" title="Open Simulated Customer Smartphone Device">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+                <line x1="12" y1="18" x2="12.01" y2="18"></line>
+              </svg>
+              <span>Customer Device</span>
+            </button>
+          </div>
+        </div>
 
         <!-- ================= VIEW 1: DASHBOARD ================= -->
         <section class="view-section active" id="view-dashboard">
@@ -288,6 +373,7 @@
                       <th>Customer</th>
                       <th>Location</th>
                       <th>Status</th>
+                      <th>Live ETA & Traffic</th>
                       <th>Assigned Rider</th>
                       <th>Action</th>
                     </tr>
@@ -373,6 +459,7 @@
                     <th>Amount</th>
                     <th>Order Time</th>
                     <th>Status</th>
+                    <th>Live ETA & Traffic</th>
                     <th>Assigned Rider</th>
                     <th>Actions</th>
                   </tr>
@@ -500,7 +587,215 @@
         </section>
 
 
-        <!-- ================= VIEW 5: SETTINGS ================= -->
+        <!-- ================= VIEW 5: LIVE GPS MAP ================= -->
+        <section class="view-section" id="view-map">
+          <div class="page-header">
+            <div>
+              <h2>Live Fleet & Delivery GPS Map</h2>
+              <p>Real-time delivery route tracking, telemetry coordinates, and traffic congestion monitoring across Kakinada</p>
+            </div>
+            <div style="display:flex; gap:0.5rem; align-items:center; flex-wrap:wrap;">
+              <button class="btn btn-outline btn-sm" id="map-recenter-btn">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="22" y1="12" x2="18" y2="12"></line>
+                  <line x1="6" y1="12" x2="2" y2="12"></line>
+                  <line x1="12" y1="6" x2="12" y2="2"></line>
+                  <line x1="12" y1="22" x2="12" y2="18"></line>
+                </svg>
+                Recenter Map
+              </button>
+              <button class="btn btn-warning btn-sm" id="map-toggle-traffic-layer-btn">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                  <polyline points="2 17 12 22 22 17"></polyline>
+                  <polyline points="2 12 12 17 22 12"></polyline>
+                </svg>
+                Toggle Traffic Heatmap
+              </button>
+            </div>
+          </div>
+
+          <div class="map-layout-grid">
+            <!-- Left/Center: Visual Vector Map Canvas -->
+            <div class="map-canvas-container card" id="map-canvas-container">
+              <div class="map-header-bar">
+                <div class="map-legend">
+                  <span class="legend-item"><span class="legend-dot hub-dot"></span> Central Hub</span>
+                  <span class="legend-item"><span class="legend-dot rider-dot"></span> Active Rider</span>
+                  <span class="legend-item"><span class="legend-dot customer-dot"></span> Customer Destination</span>
+                  <span class="legend-item"><span class="legend-dot traffic-dot"></span> Traffic Congestion Zone</span>
+                </div>
+                <div class="map-filter-wrap">
+                  <label for="map-order-filter" style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">Tracking Delivery:</label>
+                  <select id="map-order-filter" class="form-select form-select-sm" style="font-size:0.8rem; padding:0.25rem 0.6rem; min-width:160px;">
+                    <!-- Injected via JS -->
+                  </select>
+                </div>
+              </div>
+
+              <!-- SVG Interactive Vector Map of Kakinada -->
+              <div class="map-viewport" id="map-viewport">
+                <svg id="city-vector-map" viewBox="0 0 900 520" preserveAspectRatio="xMidYMid meet">
+                  <defs>
+                    <linearGradient id="roadGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" stop-color="#4F46E5" />
+                      <stop offset="100%" stop-color="#0EA5E9" />
+                    </linearGradient>
+                    <linearGradient id="trafficRoadGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" stop-color="#F59E0B" />
+                      <stop offset="100%" stop-color="#EF4444" />
+                    </linearGradient>
+                    <filter id="neonGlow" x="-20%" y="-20%" width="140%" height="140%">
+                      <feGaussianBlur stdDeviation="3" result="blur" />
+                      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                    </filter>
+                  </defs>
+
+                  <!-- Bay of Bengal Coast & Water -->
+                  <path d="M 810,0 C 790,140 780,310 830,520 L 900,520 L 900,0 Z" class="map-water" />
+                  <text x="835" y="260" class="map-water-label" transform="rotate(90, 835, 260)">Bay of Bengal</text>
+
+                  <!-- Upputeru Canal -->
+                  <path d="M 400,0 C 420,120 480,240 540,360 C 600,480 650,520 680,520" class="map-canal" />
+                  <text x="460" y="180" class="map-canal-label">Upputeru Canal</text>
+
+                  <!-- Major Kakinada City Road Network -->
+                  <g class="map-road-network">
+                    <!-- National Highway / Bypass -->
+                    <path d="M 60,40 L 260,80 L 480,110 L 780,130" class="map-road highway" />
+                    <!-- Bhanugudi - Main Road -->
+                    <path d="M 260,80 L 290,240 L 330,380 L 410,500" class="map-road arterial" />
+                    <!-- Cinema Road / Surya Rao Peta -->
+                    <path d="M 480,110 L 450,220 L 430,340 L 400,440" class="map-road arterial" />
+                    <!-- RTC Complex Cross Road -->
+                    <path d="M 120,220 L 290,240 L 450,220 L 720,240" class="map-road crossroad" />
+                    <!-- Jagannaickpur Bridge Road -->
+                    <path d="M 220,360 L 330,380 L 520,370 L 740,380" class="map-road crossroad" />
+                    <!-- Port Road -->
+                    <path d="M 480,110 L 620,180 L 760,260 L 820,380" class="map-road port-road" />
+                  </g>
+
+                  <!-- Landmark Zone Labels -->
+                  <g class="map-landmarks">
+                    <rect x="230" y="55" width="90" height="22" rx="4" class="landmark-box" />
+                    <text x="275" y="70" class="landmark-text">JNTUK Campus</text>
+
+                    <rect x="250" y="228" width="105" height="22" rx="4" class="landmark-box" />
+                    <text x="302" y="243" class="landmark-text">Bhanugudi Junc.</text>
+
+                    <rect x="100" y="208" width="85" height="22" rx="4" class="landmark-box" />
+                    <text x="142" y="223" class="landmark-text">RTC Complex</text>
+
+                    <rect x="420" y="208" width="95" height="22" rx="4" class="landmark-box" />
+                    <text x="467" y="223" class="landmark-text">Surya Rao Peta</text>
+
+                    <rect x="280" y="368" width="105" height="22" rx="4" class="landmark-box" />
+                    <text x="332" y="383" class="landmark-text">Jagannaickpur</text>
+
+                    <rect x="680" y="248" width="80" height="22" rx="4" class="landmark-box" />
+                    <text x="720" y="263" class="landmark-text">Kakinada Port</text>
+                  </g>
+
+                  <!-- Dynamic Delivery Route Paths -->
+                  <g id="map-active-routes">
+                    <!-- Populated dynamically via JS -->
+                  </g>
+
+                  <!-- Dynamic Traffic Congestion Overlays -->
+                  <g id="map-traffic-zones">
+                    <!-- Populated dynamically via JS -->
+                  </g>
+
+                  <!-- Central Logistics Hub Marker -->
+                  <g class="map-hub-marker" transform="translate(300, 240)">
+                    <circle cx="0" cy="0" r="18" class="hub-pulse-ring" />
+                    <circle cx="0" cy="0" r="10" class="hub-circle" />
+                    <text x="0" y="4" class="hub-icon-text">🏬</text>
+                    <text x="0" y="24" class="marker-caption hub-caption">Central Hub</text>
+                  </g>
+
+                  <!-- Customer Destination Pins -->
+                  <g id="map-destinations">
+                    <!-- Populated dynamically via JS -->
+                  </g>
+
+                  <!-- Animated Rider Fleet Markers -->
+                  <g id="map-riders">
+                    <!-- Populated dynamically via JS -->
+                  </g>
+                </svg>
+              </div>
+            </div>
+
+            <!-- Right: Real-Time GPS Telemetry & Active Rider Dashboard -->
+            <div class="map-telemetry-sidebar">
+              
+              <!-- Telemetry Card -->
+              <div class="card telemetry-card">
+                <div class="telemetry-header">
+                  <div>
+                    <span class="telemetry-tag">Live GPS Telemetry</span>
+                    <h3 id="telemetry-order-id" style="font-size:1.15rem; color:var(--text-primary);">#ORD-1021</h3>
+                  </div>
+                  <span class="telemetry-live-badge">
+                    <span class="sim-dot"></span> LIVE GPS
+                  </span>
+                </div>
+
+                <div class="telemetry-grid">
+                  <div class="telemetry-stat">
+                    <span class="stat-label">Latitude</span>
+                    <span class="stat-value" id="telemetry-lat">16.9452° N</span>
+                  </div>
+                  <div class="telemetry-stat">
+                    <span class="stat-label">Longitude</span>
+                    <span class="stat-value" id="telemetry-lng">82.2348° E</span>
+                  </div>
+                  <div class="telemetry-stat">
+                    <span class="stat-label">Rider Speed</span>
+                    <span class="stat-value" id="telemetry-speed">26 km/h</span>
+                  </div>
+                  <div class="telemetry-stat">
+                    <span class="stat-label">Route Status</span>
+                    <span class="stat-value" id="telemetry-traffic-status">Normal Transit</span>
+                  </div>
+                </div>
+
+                <div class="telemetry-address-block">
+                  <div class="stat-label">Current Route Segment</div>
+                  <div class="telemetry-street-name" id="telemetry-street">Jagannaickpur Main Road near Bridge</div>
+                  <div class="stat-label" style="margin-top:0.4rem;">Customer Destination</div>
+                  <div style="font-size:0.8rem; color:var(--text-primary); font-weight:500;" id="telemetry-dest-address">Plot 88, Jagannaickpur, Kakinada</div>
+                </div>
+
+                <div class="telemetry-footer-actions">
+                  <button class="btn btn-warning btn-sm" id="telemetry-trigger-traffic-btn">
+                    ⚠️ Trigger Traffic Delay
+                  </button>
+                  <button class="btn btn-outline btn-sm" id="telemetry-open-phone-btn">
+                    📱 Open Customer Phone
+                  </button>
+                </div>
+              </div>
+
+              <!-- Active Fleet Roster on Map -->
+              <div class="card" style="display:flex; flex-direction:column; gap:0.5rem;">
+                <div class="card-header" style="padding-bottom:0.5rem;">
+                  <h4 style="font-size:0.9rem; font-weight:700;">Active Fleet Telemetry</h4>
+                  <span style="font-size:0.75rem; color:var(--text-muted);" id="telemetry-active-riders-count">1 On Delivery</span>
+                </div>
+                <div class="rider-telemetry-list" id="rider-telemetry-list" style="max-height:220px; overflow-y:auto;">
+                  <!-- Populated via JS -->
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ================= VIEW 6: SETTINGS ================= -->
         <section class="view-section" id="view-settings">
           <div class="page-header">
             <div>
@@ -776,6 +1071,60 @@
           </div>
         </div>
 
+        <!-- Live ETA & Traffic Verification Banner -->
+        <div class="detail-eta-box" id="detail-eta-box">
+          <div class="detail-eta-top">
+            <div>
+              <div class="detail-eta-title">Live Delivery ETA & Traffic Verification</div>
+              <div class="detail-eta-time" id="detail-live-eta-clock">⏱️ 12 mins remaining (Est. 08:57 PM)</div>
+            </div>
+            <div id="detail-live-traffic-badge" class="badge badge-available">
+              🟢 ETA Verified: On Schedule
+            </div>
+          </div>
+
+          <!-- Progress Bar -->
+          <div class="detail-progress-track">
+            <div class="detail-progress-fill" id="detail-progress-fill" style="width: 68%;"></div>
+          </div>
+          <div class="detail-progress-labels">
+            <span>🏬 Hub Pickup</span>
+            <span id="detail-transit-text">Rider 1.5 km away</span>
+            <span>🏠 Customer</span>
+          </div>
+
+          <!-- Quick Incident Actions -->
+          <div class="detail-incident-actions">
+            <div style="display:flex; align-items:center; gap:0.35rem; flex-wrap:wrap;">
+              <button type="button" class="btn btn-warning btn-sm" id="detail-trigger-traffic-btn" title="Simulate high traffic congestion for this order">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                  <line x1="12" y1="9" x2="12" y2="13"></line>
+                  <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                </svg>
+                <span>Trigger Traffic (<span id="detail-delay-min-display">10</span>m)</span>
+              </button>
+              <select id="detail-traffic-delay-select" class="select-traffic-delay" title="Delay duration">
+                <option value="5">+5m</option>
+                <option value="10" selected>+10m</option>
+                <option value="15">+15m</option>
+                <option value="20">+20m</option>
+                <option value="custom">Custom...</option>
+              </select>
+            </div>
+            <button type="button" class="btn btn-outline-warning btn-sm" id="detail-resolve-traffic-btn" style="display:none;" title="Resolve traffic delay">
+              Clear Traffic Delay
+            </button>
+            <button type="button" class="btn btn-outline btn-sm" id="detail-open-phone-btn" title="View customer tracking device">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+                <line x1="12" y1="18" x2="12.01" y2="18"></line>
+              </svg>
+              Track on Customer Phone
+            </button>
+          </div>
+        </div>
+
         <!-- 5-Stage Live Timeline -->
         <div>
           <div style="font-size:0.85rem; font-weight:700; color:var(--text-primary); margin-bottom:0.75rem; display:flex; align-items:center; gap:0.5rem;">
@@ -826,6 +1175,224 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-outline" data-close-modal="modal-quick-assign">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ====================================================================
+       MODAL: Simulated Customer Smartphone Device
+       ==================================================================== -->
+  <div class="modal-backdrop" id="modal-customer-device">
+    <div class="phone-modal-wrapper">
+      
+      <!-- Phone Outer Chassis -->
+      <div class="phone-device" id="phone-device">
+        <!-- Physical buttons for realism -->
+        <div class="phone-volume-up"></div>
+        <div class="phone-volume-down"></div>
+        <div class="phone-power-btn"></div>
+
+        <!-- Phone Screen -->
+        <div class="phone-screen">
+          
+          <!-- Top Dynamic Island & Speaker -->
+          <div class="phone-island-notch" id="phone-notch">
+            <div class="island-camera"></div>
+            <div class="island-indicator" id="phone-sim-indicator" title="Live GPS & ETA active"></div>
+          </div>
+
+          <!-- Top Drop-down Push Notification Banner (Fast Alert) -->
+          <div class="phone-push-banner" id="phone-push-banner">
+            <div class="push-banner-header">
+              <div class="push-app-id">
+                <span class="push-app-icon">⚡</span>
+                <span class="push-app-name">QuickDispatch</span>
+              </div>
+              <span class="push-time" id="push-banner-time">Just now</span>
+            </div>
+            <div class="push-banner-title" id="push-banner-title">⚠️ Order Delayed</div>
+            <div class="push-banner-body" id="push-banner-body">Rider caught in high traffic. Please wait for 10 minutes.</div>
+          </div>
+
+          <!-- Phone Status Bar -->
+          <div class="phone-status-bar">
+            <div class="phone-time" id="phone-clock">09:41</div>
+            <div class="phone-status-icons">
+              <span class="phone-signal">5G</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L12 22l7.03-4.39C20.26 16.07 21 14.12 21 12c0-4.97-4.03-9-9-9z"/>
+              </svg>
+              <div class="phone-battery">
+                <div class="battery-level"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Phone App Bar -->
+          <div class="phone-app-header">
+            <div class="phone-app-brand">
+              <div class="phone-app-logo">QD</div>
+              <div>
+                <div class="phone-app-name">QuickDispatch Track</div>
+                <div class="phone-app-status">Live Customer Screen</div>
+              </div>
+            </div>
+            <button class="phone-close-btn" data-close-modal="modal-customer-device" title="Close Phone Preview">&times;</button>
+          </div>
+
+          <!-- Customer Order Selector Pill -->
+          <div class="phone-order-selector-wrap">
+            <label for="phone-order-select">Select Customer Phone:</label>
+            <select id="phone-order-select" class="phone-select">
+              <!-- Dynamically populated orders -->
+            </select>
+          </div>
+
+          <!-- Phone Scrollable Body -->
+          <div class="phone-scroll-content">
+            
+            <!-- High Traffic Urgent Alert Card (Visible when traffic delayed) -->
+            <div class="phone-traffic-alert-card" id="phone-traffic-alert-box" style="display:none;">
+              <div class="traffic-alert-header">
+                <span class="traffic-pulse-icon">⚠️</span>
+                <strong>Heavy Traffic Delay (+10 Mins)</strong>
+              </div>
+              <p id="phone-traffic-alert-text">Rider is currently navigating through heavy road traffic. Your order is delayed. Please wait for 10 minutes.</p>
+              <div class="traffic-alert-actions">
+                <button class="btn btn-sm btn-outline-warning" id="phone-resolve-traffic-btn">Clear Delay (Simulate)</button>
+              </div>
+            </div>
+
+            <!-- Tracking Mode Switcher on Phone -->
+            <div class="phone-tracking-tabs">
+              <button type="button" class="phone-tab-btn active" id="phone-tab-stepper">🛣️ Stepper</button>
+              <button type="button" class="phone-tab-btn" id="phone-tab-map">🗺️ Mini GPS Map</button>
+            </div>
+
+            <!-- Live ETA & Progress Hero Card -->
+            <div class="phone-eta-card" id="phone-eta-card">
+              <div class="phone-eta-header">
+                <span class="phone-eta-label">Estimated Delivery Arrival</span>
+                <span class="phone-eta-badge on-time" id="phone-eta-badge">🟢 ETA Verified</span>
+              </div>
+              <div class="phone-countdown-clock" id="phone-countdown-clock">12:00</div>
+              <div class="phone-arrival-time" id="phone-arrival-time">Est. Arrival: Today, 08:57 PM</div>
+
+              <!-- Animated Road / Route Bar -->
+              <div class="route-progress-track" id="phone-stepper-view">
+                <div class="route-point hub-point" title="Hub">🏬</div>
+                <div class="route-line-fill" id="phone-route-fill" style="width: 68%;"></div>
+                <div class="route-rider-marker" id="phone-route-rider" style="left: 68%;">
+                  <span class="rider-emoji">🛵</span>
+                  <span class="rider-pulse"></span>
+                </div>
+                <div class="route-point home-point" title="Customer Destination">🏠</div>
+              </div>
+
+              <!-- Mini GPS Vector Map View inside Phone -->
+              <div class="phone-mini-map-view" id="phone-map-view" style="display:none;">
+                <svg id="phone-mini-svg-map" viewBox="0 0 320 160">
+                  <rect width="320" height="160" fill="var(--bg-subtle)" rx="8" />
+                  <path d="M 20,40 L 300,40 M 20,80 L 300,80 M 20,120 L 300,120 M 60,10 L 60,150 M 160,10 L 160,150 M 260,10 L 260,150" stroke="var(--border-color)" stroke-width="2" />
+                  <path id="phone-mini-route-line" d="M 60,80 L 160,80 L 260,120" stroke="#4F46E5" stroke-width="4" stroke-linecap="round" fill="none" />
+                  <circle cx="60" cy="80" r="8" fill="#4F46E5" />
+                  <text x="60" y="72" text-anchor="middle" font-size="8" fill="var(--text-muted)" font-weight="bold">Hub</text>
+                  <circle cx="260" cy="120" r="8" fill="#10B981" />
+                  <text x="260" y="140" text-anchor="middle" font-size="8" fill="#10B981" font-weight="bold">Home</text>
+                  <g id="phone-mini-rider-marker" transform="translate(160, 80)">
+                    <circle cx="0" cy="0" r="10" fill="#F59E0B" />
+                    <text x="0" y="4" text-anchor="middle" font-size="11">🛵</text>
+                  </g>
+                </svg>
+                <div class="phone-mini-telemetry">
+                  <span id="phone-mini-gps">16.9452° N, 82.2348° E</span> • <span id="phone-mini-speed">26 km/h</span>
+                </div>
+              </div>
+
+              <div class="route-status-caption" id="phone-route-caption">
+                Rider en route • 1.5 km away
+              </div>
+            </div>
+
+            <!-- Assigned Rider Card -->
+            <div class="phone-rider-card" id="phone-rider-card">
+              <div class="phone-rider-avatar" id="phone-rider-avatar">AR</div>
+              <div class="phone-rider-details">
+                <div class="phone-rider-name" id="phone-rider-name">Ananya Roy</div>
+                <div class="phone-rider-sub" id="phone-rider-sub">Ather 450X (EV) • ⭐ 4.9</div>
+                <div class="phone-rider-contact" id="phone-rider-phone">+91 98483 45678</div>
+              </div>
+              <button class="phone-call-btn" id="phone-call-rider-btn" title="Simulate Call Rider">
+                📞
+              </button>
+            </div>
+
+            <!-- Order Details Snapshot -->
+            <div class="phone-order-card">
+              <div class="phone-section-title">Order Information</div>
+              <div class="phone-order-row">
+                <span class="phone-order-key">Order ID</span>
+                <strong id="phone-order-id">#ORD-1021</strong>
+              </div>
+              <div class="phone-order-row">
+                <span class="phone-order-key">Items</span>
+                <span id="phone-order-items">Grocery Bundle</span>
+              </div>
+              <div class="phone-order-row">
+                <span class="phone-order-key">Amount</span>
+                <strong id="phone-order-amount">₹890</strong>
+              </div>
+              <div class="phone-order-row">
+                <span class="phone-order-key">Delivery Address</span>
+                <span id="phone-order-address" style="text-align:right; max-width:60%;">Plot 88, Jagannaickpur, Kakinada</span>
+              </div>
+            </div>
+
+            <!-- Live Notifications Log on Device -->
+            <div class="phone-notifs-section">
+              <div class="phone-section-title">
+                <span>Customer Notifications Inbox</span>
+                <span class="phone-notif-count" id="phone-notif-count">4</span>
+              </div>
+              <div class="phone-notifs-list" id="phone-notifs-list">
+                <!-- Notifications injected via JS -->
+              </div>
+            </div>
+
+            <!-- Testing / Demonstration Tools Bar on Phone -->
+            <div class="phone-demo-tools">
+              <div class="phone-section-title" style="margin-bottom:0.4rem;">Presentation Live Simulation</div>
+              <div class="phone-demo-grid">
+                <div style="display:flex; gap:0.25rem;">
+                  <button class="btn btn-warning btn-sm" id="phone-test-traffic-btn" style="flex:1;">
+                    ⚠️ Traffic (<span id="phone-delay-btn-label">10</span>m)
+                  </button>
+                  <select id="phone-delay-select" class="select-traffic-delay" style="max-width:65px;" title="Delay duration">
+                    <option value="5">5m</option>
+                    <option value="10" selected>10m</option>
+                    <option value="15">15m</option>
+                    <option value="20">20m</option>
+                    <option value="custom">...</option>
+                  </select>
+                </div>
+                <button class="btn btn-primary btn-sm" id="phone-test-advance-btn">
+                  ⏩ Advance Stage
+                </button>
+              </div>
+              <div class="phone-audio-toggle">
+                <label>
+                  <input type="checkbox" id="phone-sound-toggle" checked>
+                  <span>🔊 Play Customer Device Chimes</span>
+                </label>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Bottom Home Indicator -->
+          <div class="phone-home-indicator"></div>
+        </div>
       </div>
     </div>
   </div>
